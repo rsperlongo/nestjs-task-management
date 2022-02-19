@@ -1,3 +1,4 @@
+import { JwtStrategy } from './jwt-strategy';
 import { UserRepository } from './users.repository';
 import { AuthController } from './auth.controller';
 import { Module } from '@nestjs/common';
@@ -17,7 +18,8 @@ import { JwtModule } from '@nestjs/jwt';
     }),
     TypeOrmModule.forFeature([UserRepository]),
   ],
-  providers: [AuthService],
+  providers: [AuthService, JwtStrategy],
   controllers: [AuthController],
+  exports: [JwtStrategy, PassportModule],
 })
 export class AuthModule {}
